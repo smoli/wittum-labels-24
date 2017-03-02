@@ -1,0 +1,75 @@
+div {
+    overflow: hidden;
+}
+.letterBox {
+    font-family: "Source Sans Pro";
+    font-weight: bold;
+    font-size: 13pt;
+}
+
+.letterBox .cc {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.doorBell {
+    font-family: "Source Sans Pro";
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.doorBell .cc {
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;
+}
+
+.letterBox span.appartment {
+    margin-right: 0.5em !important;
+}
+
+.doorBell span.appartment {
+    position: absolute;
+    padding-left: 2mm;
+    padding-top: 0;
+    margin-top: 20mm;
+    font-size: 2em;
+}
+
+.doorBell .names {
+    text-align: center;
+    display: block;
+    padding-top: 1em;
+    margin: 0 !important;
+}
+
+.header {
+    background-color: #4183c4;
+    margin: 0;
+    padding: 1em 2em;
+    margin-bottom: 1em;
+    color: #f9f9f9;
+    font-size: 4em;
+    font-weight: 400;
+}
+
+h1 {
+    border-bottom: 1px solid #ddd;
+}
+
+@media print {
+    .noprint, .noprint * {
+        display: none
+    }
+
+    .header {
+        font-size: 2em;
+        padding: 0;
+    }
+}
+
+.letsgo {
+    width: 15em;
+    margin-top: 1em;
+}
