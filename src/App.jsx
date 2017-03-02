@@ -101,7 +101,8 @@ class App extends Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-4 noprint">
+                    <div className="col-md-1 noprint"></div>
+                    <div className="col-md-3 noprint">
                         <h1>Deine Daten</h1>
                         <form onSubmit={e => e.preventDefault()}>
                             {appState.names.map((n, i) =>
@@ -144,7 +145,8 @@ class App extends Component {
                             }
                         </form>
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-md-1 noprint"></div>
+                    <div className="col-md-5">
                         <h1 className="noprint">Labels</h1>
                         <div className="labelSheet">
                             <CutoutBox className="letterBox" width="65" height="14"
