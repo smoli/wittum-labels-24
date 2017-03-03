@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
-/*
- import {makeLabelSet} from './labels';
- import blobStream from 'blob-stream';
- var PDFDocument = require('pdfkit');
- */
-
 
 var Spacer = props => <div style={{height: "2cm"}}></div>;
 
@@ -92,11 +86,9 @@ class App extends Component {
         var appState = this.props.appState;
 
         var apts = [];
-        for (var i = 1; i <= 20; apts.push(i++)) {
-        }
+        for (var i = 1; i <= 20; apts.push(i++)) {}
 
         var appt = appState.showAppartment ? <span className="appartment">{appState.appartment}</span> : null;
-
 
         return (
             <div className="container">
@@ -108,7 +100,7 @@ class App extends Component {
                             {appState.names.map((n, i) =>
                                 <div className="form-group" key={i}>
                                     <label>{i ? "noch ein " : ""}Name</label><br/>
-                                    <input key={i} value={n} placeholder={i === 0 ? "immer ein Name" : ""}
+                                    <input key={i} value={n} placeholder={i === 0 ? "ein Name pro Feld" : i > 2 ? "ab hier wird's eng" : `${i+1}. Name`}
                                            onChange={e => this.nameChanged(n, i, e)}/></div>)}
 
                             <div className="checkbox">
@@ -120,7 +112,7 @@ class App extends Component {
                             </div>
                                 {appState.showAppartment ?
                             <div className="form-group">
-                                    <label htmlFor="appartmentNumber">Wohnungsnummer&nbsp;</label>
+                                    <label htmlFor="appartmentNumber">Wohnung&nbsp;</label>
                                 <select id="appartmentNumber" value={appState.appartment}
                                         onChange={e => appState.appartment = e.target.value}>
                                     {apts.map(i => <option key={i} value={i}>{i}</option>)}
@@ -136,6 +128,7 @@ class App extends Component {
                                     Scheren
                                 </label>
                             </div>
+                            {appState.dotted ? <p className="info">Wenn du ein Messer und ein Lineal aus Metall hast, solltest du die Schnittkanten ausblenden.</p> : null}
 
                             {appState.names.filter(n => !!n).length ?
                             <div className="form-group">
@@ -169,6 +162,7 @@ class App extends Component {
                             <CutoutBox className="doorBell" width="47" height="37"
                                        dotted={appState.dotted}>
                                 {appt}
+                                { appState.names.filter(n => !!n).length < 3 ? <br/> : null}
                                 <span className="names">{appState.names.filter(n => !!n).map(n => [n, <br/>])}</span>
                             </CutoutBox></div>
                     </div>

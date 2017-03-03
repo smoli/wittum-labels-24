@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node server.js",
     "lint": "eslint src",
-    "build": "webpack --config webpack-dist.config.js && copy index.html dist && copy style.css dist"
+    "build": "webpack --config webpack-dist.config.js && copy index.html dist && copy style.css dist && copy WittumHeader.png dist"
   },
   "repository": {
     "type": "git",
