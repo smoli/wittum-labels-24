@@ -18,17 +18,18 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            'react': 'react-lite',
+            'react-dom': 'react-lite'
+        }
     },
     module: {
-        postLoaders: [ {
-            test: /pdfkit|png-js|brfs|static-module|resolve|fontkit|unicode-properties|brotli/,
-            loader: "transform?brfs"
-        }],
+
         loaders: [
             {
                 test: /\.jsx?$/,
-                loaders: ['babel'],
+                loaders: ['babel-loader'],
                 include: path.join(__dirname, 'src')
             }, {
                 test: /\.json/,

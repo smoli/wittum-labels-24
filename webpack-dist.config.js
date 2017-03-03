@@ -15,14 +15,17 @@ module.exports = {
         new webpack.optimize.UglifyJsPlugin({})
     ],
     resolve: {
-        extensions: ['', '.js', '.jsx']
+        extensions: ['.js', '.jsx'],
+        alias: {
+            'react': 'react-lite',
+            'react-dom': 'react-lite'
+        }
     },
     module: {
-        postLoaders: [],
         loaders: [
             {
                 test: /\.jsx?$/,
-                loaders: ['babel'],
+                loaders: ['babel-loader'],
                 include: path.join(__dirname, 'src')
             }]
     }
