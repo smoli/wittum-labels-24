@@ -55,7 +55,6 @@ class Labels extends Component {
     render() {
         var appState = this.props.appState;
 
-        var appt = appState.showAppartment ? <span className="appartment">{appState.appartment}</span> : null;
         var letterBoxText = appState.names.filter(n => !!n).join("/");
         if (appState.showAppartment) {
             letterBoxText = `${appState.appartment} - ${letterBoxText}`;
@@ -100,6 +99,8 @@ class Labels extends Component {
 class App extends Component {
     render() {
         var appState = this.props.appState;
+        var apts = [];
+        for (var i = 1; i <= 20; apts.push(i++)) {}
 
         return (
             <div className="container">

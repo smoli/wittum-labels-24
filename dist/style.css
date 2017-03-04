@@ -40,55 +40,6 @@ text.doorBell {
 div {
     overflow: hidden;
 }
-.letterBox {
-    font-family: "Source Sans Pro";
-    font-weight: bold;
-    font-size: 13pt;
-}
-
-.letterBox .cc {
-    text-align: center;
-}
-
-.letterBox .cc span {
-    color: green;
-    vertical-align: middle;
-    display: table-cell;
-    position: relative;
-    top: 0;
-    bottom: 0;
-
-}
-
-.doorBell {
-    font-family: "Source Sans Pro";
-    font-weight: bold;
-    font-size: 14pt;
-}
-
-.doorBell .cc {
-    text-align: left;
-    vertical-align: top;
-}
-
-.letterBox span.appartment {
-    margin-right: 0.5em !important;
-}
-
-.doorBell span.appartment {
-    position: absolute;
-    padding-left: 2mm;
-    padding-top: 0;
-    margin-top: 20mm;
-    font-size: 2em;
-}
-
-.doorBell .names {
-    text-align: center;
-    display: block;
-    padding-top: 0;
-    margin: 0 !important;
-}
 
 .header {
     background: rgb(94, 163, 228);
