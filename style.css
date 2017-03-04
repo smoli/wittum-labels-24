@@ -1,3 +1,42 @@
+path {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.1pt;
+}
+
+rect.dotted {
+    stroke: #aaa;
+    stroke-dasharray: 1 1;
+    stroke-width: 0.1pt;
+    fill: none;
+}
+
+text.letterBox, text.doorBell, text.doorBellAppartment, text.doorBell tspan {
+    font-family: "Source Sans Pro";
+    font-weight: bold;
+    text-anchor: middle;
+    fill: black;
+    stroke: none;
+}
+
+text.letterBox {
+    font-size: 1.2mm;
+    alignment-baseline: middle;
+    dominant-baseline: middle;
+}
+
+text.doorBellAppartment {
+    font-size: 2.8mm;
+    text-anchor: start;
+}
+
+text.doorBell {
+    font-size: 1.3mm;
+}
+
+
+
+
 div {
     overflow: hidden;
 }
@@ -8,9 +47,17 @@ div {
 }
 
 .letterBox .cc {
-    display: table-cell;
     text-align: center;
+}
+
+.letterBox .cc span {
+    color: green;
     vertical-align: middle;
+    display: table-cell;
+    position: relative;
+    top: 0;
+    bottom: 0;
+
 }
 
 .doorBell {
@@ -20,7 +67,6 @@ div {
 }
 
 .doorBell .cc {
-    display: table-cell;
     text-align: left;
     vertical-align: top;
 }
