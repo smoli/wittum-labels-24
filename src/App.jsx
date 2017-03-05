@@ -3,6 +3,8 @@ import {observer} from 'mobx-react';
 
 var Spacer = props => <div style={{height: "1cm"}}></div>;
 
+var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
 var Box = props => {
     var d = "";
     if (props.t) {
@@ -30,7 +32,13 @@ var CutoutBox = props => {
     var w = 2 * leg + props.width;
     var h = 2 * leg + props.height;
 
-    return <svg width={`${w}mm`} height={`${h}mm`} viewBox={`0 0 ${w} ${h}`}>
+    var f = 1.0;
+    if (isSafari) {
+        f = 1 / 0.93;
+    }
+
+
+    return <svg width={`${2 * w}mm`} height={`${h}mm`} viewBox={`0 0 ${2 * f * w} ${f * h}`}>
         <Box w={leg} h={leg} r b x={0} y={0}/>
         <Box w={leg} h={leg} l b x={leg + props.width} y={0}/>
 
@@ -45,6 +53,11 @@ var CutoutBox = props => {
         <g transform={`translate(${leg} ${leg})`}>
             {props.children}
         </g>
+
+        <text y={2 * leg} className="info">
+            <tspan x={w + 20}>{`${props.width}mm x ${props.height}mm`}</tspan>
+            <tspan x={w + 20} dy="7">{props.where}</tspan>
+            </text>
         ;
     </svg>;
 };
@@ -69,21 +82,29 @@ class Labels extends Component {
 
         return <div className="labelSheet">
             <CutoutBox width={65} height={14}
-                       dotted={appState.dotted}>
+                       dotted={appState.dotted}
+                       where="Briefkasten"
+            >
                 <text className="letterBox" x={65 / 2} y={7}>{letterBoxText} </text>
             </CutoutBox>
             <Spacer/>
             <CutoutBox width={65} height={14}
-                       dotted={appState.dotted}>
+                       dotted={appState.dotted}
+                       where="Briefkasten"
+            >
                 <text className="letterBox" x={65 / 2} y={7}>{letterBoxText} </text>
             </CutoutBox>
             <Spacer/>
             <CutoutBox width={60} height={15}
-                       dotted={appState.dotted}>
+                       dotted={appState.dotted}
+                       where="Klingel Haustür"
+            >
                 <text className="letterBox" x={30} y={7.5}>{letterBoxText} </text>
             </CutoutBox>
             <Spacer/>
-            <CutoutBox width={47} height={37} dotted={appState.dotted}>
+            <CutoutBox width={47} height={37} dotted={appState.dotted}
+                       where="Klingel Wohnungstür"
+            >
                 {doorBellText}
                 {appState.showAppartment ?
                     <text className="doorBellAppartment" x="4" y="32">{appState.appartment}</text>
