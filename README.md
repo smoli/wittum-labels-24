@@ -22,7 +22,9 @@ creates a folder `dist` and puts everything necessary into that folder.
 
 #### Dependencies
 
-Once built, the app does not have any dependencies to JavaScript libraries. The font **Source Sans Pro** is loaded from Google and bootstraps stylesheet is used.
+The font **Source Sans Pro** is loaded from Google and bootstraps stylesheet is used.
+
+For all other dependencies see [package.json](https://github.com/mobxjs/mobx-react-boilerplate/blob/master/package.json).
 
 ### Acknowledgements
 
