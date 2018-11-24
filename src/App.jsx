@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react';
 
-var Spacer = props => <div style={{height: "1cm"}}></div>;
+const Spacer = props => <div style={{height: "1cm"}}></div>;
 
-var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-var Box = props => {
-    var d = "";
+const Box = props => {
+    let d = "";
     if (props.t) {
         d += `M0 0 l${props.w} 0 `;
     }
@@ -26,13 +26,13 @@ var Box = props => {
     </g>;
 };
 
-var CutoutBox = props => {
+const CutoutBox = props => {
     const leg = 5;
 
-    var w = 2 * leg + props.width;
-    var h = 2 * leg + props.height;
+    const w = 2 * leg + props.width;
+    const h = 2 * leg + props.height;
 
-    var f = 1.0;
+    let f = 1.0;
     if (isSafari) {
         f = 1 / 0.93;
     }
@@ -56,7 +56,7 @@ var CutoutBox = props => {
 
         <text y={2 * leg} className="info">
             <tspan x={w + 20}>{`${props.width}mm x ${props.height}mm`}</tspan>
-            <tspan x={w + 20} dy="7">{props.where}</tspan>
+            <tspan x={w + 20} dy="6">{props.where}</tspan>
             </text>
         ;
     </svg>;
@@ -66,15 +66,15 @@ var CutoutBox = props => {
 @observer
 class Labels extends Component {
     render() {
-        var appState = this.props.appState;
+        const appState = this.props.appState;
 
-        var letterBoxText = appState.names.filter(n => !!n).join("/");
+        let letterBoxText = appState.names.filter(n => !!n).join("/");
         if (appState.showAppartment) {
             letterBoxText = `${appState.appartment} - ${letterBoxText}`;
         }
 
-        var lineSize = 6;
-        var doorBellText =
+        const lineSize = 6;
+        const doorBellText =
             <text className="doorBell" x={47 / 2} y={appState.names.filter(n => !!n).length > 2 ? 0 : lineSize}>
                 {appState.names.map((n, i) => <tspan x={47 / 2} dy={lineSize}>{n}</tspan>)}
             </text>;
@@ -119,19 +119,19 @@ class Labels extends Component {
 @observer
 class App extends Component {
     render() {
-        var appState = this.props.appState;
-        var apts = [];
-        for (var i = 1; i <= 20; apts.push(i++)) {}
+        const appState = this.props.appState;
+        const apts = [];
+        for (let i = 1; i <= 20; apts.push(i++)) {}
 
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-1 noprint"></div>
+                    <div className="col-md-1 noprint"/>
                     <div className="col-md-3 noprint">
                         <h1>Deine Daten</h1>
                         <form onSubmit={e => e.preventDefault()}>
                             {appState.names.map((n, i) =>
-                                <div className="form-group" key={i}>
+                                <div className="form-group" key={`group${i}`}>
                                     <label>{i ? "noch ein " : ""}Name</label><br/>
                                     <input key={`textField${i}`} value={n}
                                            placeholder={i === 0 ? "ein Name pro Feld" : i > 2 ? "ab hier wird's eng" : `${i + 1}. Name`}
@@ -176,9 +176,9 @@ class App extends Component {
                                 </div>
                                 : null
                             }
-                        </form>;
+                        </form>
                     </div>
-                    <div className="col-md-1 noprint"></div>
+                    <div className="col-md-1 noprint"/>
                     <div className="col-md-5">
                         <h1 className="noprint">Labels</h1>
                         <Labels appState={appState}/>
@@ -190,8 +190,12 @@ class App extends Component {
     }
 
     nameChanged(oldName, index, event) {
-        var names = this.props.appState.names;
-        var newName = event.target.value;
+        const names = this.props.appState.names;
+        const newName = event.target.value;
+
+        if (index === names.length - 1 && newName === "") {
+            return;
+        }
 
         names[index] = newName;
 
@@ -199,7 +203,7 @@ class App extends Component {
             names.replace(names.filter(n => !!n));
             names.push("");
         } else {
-            var last = names[names.length - 1];
+            const last = names[names.length - 1];
             if (last) {
                 names.push("");
             }
