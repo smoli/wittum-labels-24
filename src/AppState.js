@@ -5,6 +5,8 @@ class AppState {
     @observable appartment = 1;
     @observable dotted = false;
     @observable showAppartment = false;
+    
+    @observable multilineLetterbox = false;
 
 }
 

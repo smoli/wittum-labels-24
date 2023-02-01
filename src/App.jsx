@@ -68,10 +68,22 @@ class Labels extends Component {
     render() {
         const appState = this.props.appState;
 
-        let letterBoxText = appState.names.filter(n => !!n).join("/");
-        if (appState.showAppartment) {
-            letterBoxText = `${appState.appartment} - ${letterBoxText}`;
+        let letterBoxTexts = [];
+
+        if (appState.multilineLetterbox) {
+            if (appState.names.length) {
+                letterBoxTexts.push(appState.names.filter(n => !!n)[0]);
+            }
+            if (appState.names.length > 1) {
+                letterBoxTexts.push(appState.names.filter((n, i) => !!n && i).join("/"));
+            }
+        } else {
+            letterBoxTexts.push(appState.names.filter((n) => !!n).join("/"));
         }
+        if (appState.showAppartment) {
+            letterBoxTexts[0] = `${appState.appartment} - ${letterBoxTexts[0]}`;
+        }
+
 
         const lineSize = 6;
         const doorBellText =
@@ -79,27 +91,38 @@ class Labels extends Component {
                 {appState.names.map((n, i) => <tspan x={47 / 2} dy={lineSize}>{n}</tspan>)}
             </text>;
 
+        let letterBoxText;
+
+        if (appState.multilineLetterbox) {
+            letterBoxText = <text className="letterBox" y={-lineSize / 3.2} x={65 / 2}>
+                {letterBoxTexts.map(t => <tspan x={65 / 2} dy={lineSize}>{t}</tspan>)}
+            </text>
+        } else {
+            letterBoxText = <text className="letterBox" x={65 / 2} y={7}>{letterBoxTexts[0]} </text>
+        }
+
 
         return <div className="labelSheet">
             <CutoutBox width={65} height={14}
                        dotted={appState.dotted}
                        where="Briefkasten"
             >
-                <text className="letterBox" x={65 / 2} y={7}>{letterBoxText} </text>
+                {letterBoxText}
             </CutoutBox>
+
             <Spacer/>
             <CutoutBox width={65} height={14}
                        dotted={appState.dotted}
                        where="Briefkasten"
             >
-                <text className="letterBox" x={65 / 2} y={7}>{letterBoxText} </text>
+                {letterBoxText}
             </CutoutBox>
             <Spacer/>
             <CutoutBox width={60} height={15}
                        dotted={appState.dotted}
                        where="Klingel Haustür"
             >
-                <text className="letterBox" x={30} y={7.5}>{letterBoxText} </text>
+                {letterBoxText}
             </CutoutBox>
             <Spacer/>
             <CutoutBox width={47} height={37} dotted={appState.dotted}
@@ -136,6 +159,14 @@ class App extends Component {
                                     <input key={`textField${i}`} value={n}
                                            placeholder={i === 0 ? "ein Name pro Feld" : i > 2 ? "ab hier wird's eng" : `${i + 1}. Name`}
                                            onChange={e => this.nameChanged(n, i, e)}/></div>)}
+
+                            <div className="checkbox">
+                                <label>
+                                    <input type="checkbox" checked={appState.multilineLetterbox}
+                                           onChange={e => appState.multilineLetterbox = e.target.checked}/> Briefkastenschild
+                                    zweizeilig
+                                </label>
+                            </div>
 
                             <div className="checkbox">
                                 <label>
